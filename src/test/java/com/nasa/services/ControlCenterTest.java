@@ -1,6 +1,6 @@
 package com.nasa.services;
 
-import com.nasa.exception.InvalidCommandException;
+import com.nasa.exception.InvalidSequenceException;
 import com.nasa.factories.AreaFactory;
 import com.nasa.factories.CommandsFactory;
 import org.junit.Before;
@@ -29,26 +29,26 @@ public class ControlCenterTest {
     }
 
     @Test
-    public void callAreaFactoryIfCommandIsValid() throws InvalidCommandException {
-        String commands = "5 5 1 2 N LMLMLMLMM";
-        control.execute(commands);
-        verify(areaFactory).create(commands);
+    public void callAreaFactoryIfSequenceIsValid() throws InvalidSequenceException {
+        String sequence = "5 5 1 2 N LMLMLMLMM";
+        control.execute(sequence);
+        verify(areaFactory).create(sequence);
     }
 
     @Test
-    public void callCommandsFactoryIfCommandIsValid() throws InvalidCommandException {
-        String commands = "5 5 1 2 N LMLMLMLMM";
-        control.execute(commands);
-        verify(commandsFactory).create(commands);
+    public void callCommandsFactoryIfSequenceIsValid() throws InvalidSequenceException {
+        String Sequence = "5 5 1 2 N LMLMLMLMM";
+        control.execute(Sequence);
+        verify(commandsFactory).create(Sequence);
     }
 
-    @Test(expected = InvalidCommandException.class)
-    public void throwsExceptionIfCommandDoesNotHaveArea() throws InvalidCommandException {
+    @Test(expected = InvalidSequenceException.class)
+    public void throwsExceptionIfSequenceDoesNotHaveArea() throws InvalidSequenceException {
         control.execute("1 2 N LMLMLMLMM 3 3 E MMRMMRMRRM");
     }
 
-    @Test(expected = InvalidCommandException.class)
-    public void throwsExceptionIfCommandAreaIsIncomplete() throws InvalidCommandException {
+    @Test(expected = InvalidSequenceException.class)
+    public void throwsExceptionIfSequenceAreaIsIncomplete() throws InvalidSequenceException {
         control.execute("5 1 2 N LMLMLMLMM 3 3 E MMRMMRMRRM");
     }
 }

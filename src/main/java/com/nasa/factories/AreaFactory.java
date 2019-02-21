@@ -1,7 +1,7 @@
 package com.nasa.factories;
 
 import com.nasa.domain.Area;
-import com.nasa.exception.InvalidCommandException;
+import com.nasa.exception.InvalidSequenceException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 public class AreaFactory {
     public static String AREA_REGEX = "^(?<top>\\d)\\s(?<right>\\d)";
 
-    public Area create(String commands) throws InvalidCommandException {
+    public Area create(String sequence) throws InvalidSequenceException {
         Pattern pattern = Pattern.compile(AREA_REGEX);
-        Matcher matcher = pattern.matcher(commands);
+        Matcher matcher = pattern.matcher(sequence);
 
         if(matcher.find()) {
             int topArea = Integer.parseInt(matcher.group("top"));
@@ -19,7 +19,7 @@ public class AreaFactory {
 
             return new Area(topArea, rightArea);
         } else {
-            throw new InvalidCommandException();
+            throw new InvalidSequenceException();
         }
     }
 }

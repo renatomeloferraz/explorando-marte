@@ -1,6 +1,6 @@
 package com.nasa.services;
 
-import com.nasa.exception.InvalidCommandException;
+import com.nasa.exception.InvalidSequenceException;
 import com.nasa.factories.AreaFactory;
 import com.nasa.factories.CommandsFactory;
 
@@ -17,21 +17,21 @@ public class ControlCenter {
         this.commandsFactory = commandsFactory;
     }
 
-    public void execute(String commands) throws InvalidCommandException {
-        if(isValidCommands(commands)) {
-            areaFactory.create(commands);
-            commandsFactory.create(commands);
+    public void execute(String sequence) throws InvalidSequenceException {
+        if(isValid(sequence)) {
+            areaFactory.create(sequence);
+            commandsFactory.create(sequence);
         }
     }
 
-    private boolean isValidCommands(String commands) throws InvalidCommandException {
+    private boolean isValid(String sequence) throws InvalidSequenceException {
         Pattern pattern = Pattern.compile(AreaFactory.AREA_REGEX + "\\s" + CommandsFactory.COMMAND_REGEX);
-        Matcher matcher = pattern.matcher(commands);
+        Matcher matcher = pattern.matcher(sequence);
 
         if(matcher.find()) {
             return true;
         } else {
-            throw new InvalidCommandException();
+            throw new InvalidSequenceException();
         }
     }
 }

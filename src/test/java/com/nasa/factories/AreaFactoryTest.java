@@ -1,7 +1,7 @@
 package com.nasa.factories;
 
 import com.nasa.domain.Area;
-import com.nasa.exception.InvalidCommandException;
+import com.nasa.exception.InvalidSequenceException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class AreaFactoryTest {
     private Area area;
 
     @Before
-    public void setUp() throws InvalidCommandException {
+    public void setUp() throws InvalidSequenceException {
         AreaFactory factory = new AreaFactory();
         area = factory.create("5 5 1 2 N LMLMLMLMM");
     }

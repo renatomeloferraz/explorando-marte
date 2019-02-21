@@ -10,12 +10,9 @@ import java.util.regex.Pattern;
 public class CommandsFactory {
     public static final String COMMAND_REGEX = "(?<x>\\d)\\s(?<y>\\d)\\s(?<direction>[N|S|W|E])\\s(?<movements>[M|R|L]*)";
 
-    private List<Command> commands;
-
-    public List<Command> create(String command) {
-        commands = new ArrayList<>();
-
-        Matcher matcher = Pattern.compile(COMMAND_REGEX).matcher(command);
+    public List<Command> create(String sequence) {
+        List<Command> commands = new ArrayList<>();
+        Matcher matcher = Pattern.compile(COMMAND_REGEX).matcher(sequence);
 
         while (matcher.find()) {
             commands.add(new Command(
