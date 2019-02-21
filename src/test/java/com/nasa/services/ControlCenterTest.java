@@ -2,6 +2,7 @@ package com.nasa.services;
 
 import com.nasa.exception.InvalidCommandException;
 import com.nasa.factories.AreaFactory;
+import com.nasa.factories.CommandsFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +18,14 @@ public class ControlCenterTest {
     @Mock
     private AreaFactory areaFactory;
 
+    @Mock
+    private CommandsFactory commandsFactory;
+
     private ControlCenter control;
 
     @Before
     public void setUp() {
-        control = new ControlCenter(areaFactory);
+        control = new ControlCenter(areaFactory, commandsFactory);
     }
 
     @Test
@@ -29,6 +33,13 @@ public class ControlCenterTest {
         String commands = "5 5 1 2 N LMLMLMLMM";
         control.execute(commands);
         verify(areaFactory).create(commands);
+    }
+
+    @Test
+    public void callCommandsFactoryIfCommandIsValid() throws InvalidCommandException {
+        String commands = "5 5 1 2 N LMLMLMLMM";
+        control.execute(commands);
+        verify(commandsFactory).create(commands);
     }
 
     @Test(expected = InvalidCommandException.class)
