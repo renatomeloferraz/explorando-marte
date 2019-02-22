@@ -6,11 +6,11 @@ public class Command {
     private final String direction;
     private final String[] movements;
 
-    public Command(int x, int y, String direction, String movements) {
+    public Command(int x, int y, String direction, String[] movements) {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        this.movements = movements.split("");
+        this.movements = movements;
     }
 
     public int getX() {
@@ -27,5 +27,9 @@ public class Command {
 
     public String[] getMovements() {
         return movements;
+    }
+
+    public Rover getRover() {
+        return new Rover(x, y);
     }
 }

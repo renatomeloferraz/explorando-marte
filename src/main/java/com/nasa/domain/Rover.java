@@ -10,6 +10,14 @@ public class Rover {
         this.y = y;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     public void moveToNorth() {
 
     }
@@ -24,9 +32,5 @@ public class Rover {
 
     public void moveToWest() {
 
-    }
-
-    public void setState(State state) {
-        this.state = state;
     }
 }

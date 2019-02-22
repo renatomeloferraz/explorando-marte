@@ -19,7 +19,7 @@ public class CommandsFactory {
                     Integer.parseInt(matcher.group("x")),
                     Integer.parseInt(matcher.group("y")),
                     matcher.group("direction" ),
-                    matcher.group("movements" )
+                    matcher.group("movements" ).split("")
             ));
         }
 
