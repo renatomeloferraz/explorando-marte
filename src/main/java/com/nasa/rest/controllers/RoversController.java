@@ -1,18 +1,18 @@
 package com.nasa.rest.controllers;
 
 import com.nasa.rest.builders.RoverBuilder;
-import com.nasa.rest.requests.RoverRequest;
+import com.nasa.rest.domains.Rover;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-class RoversController {
+public class RoversController {
 
     @Autowired
     private RoverBuilder builder;
 
     @PostMapping("/rovers")
-    RoverRequest create(@RequestBody RoverRequest request) {
+    public Rover create(@RequestBody Rover request) {
         return builder.create(request);
     }
 }

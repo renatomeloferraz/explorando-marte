@@ -1,11 +1,22 @@
 package com.nasa.rest.builders;
 
-import com.nasa.rest.requests.RoverRequest;
+import com.nasa.rest.domains.Rover;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class RoverBuilder {
-    public RoverRequest create(RoverRequest request) {
-        return request;
+
+    private Map<String, Rover> rovers = new HashMap<>();
+
+    public Rover create(Rover rover) {
+        rovers.put(rover.getId(), rover);
+        return rover;
+    }
+
+    public Map<String, Rover> getRovers() {
+        return rovers;
     }
 }
