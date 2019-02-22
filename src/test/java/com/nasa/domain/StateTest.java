@@ -17,73 +17,73 @@ public class StateTest {
 
     @Test
     public void movesRoverToNorth() throws OutOfAreaException {
-        State.NORTH.move(rover);
+        State.N.move(rover);
         verify(rover).movesToNorth();
     }
 
     @Test
     public void turnRoverInNorthToLeft() {
-        State.NORTH.turnLeft(rover);
-        verify(rover).setState(WEST);
+        State.N.turnLeft(rover);
+        verify(rover).setState(W);
     }
 
     @Test
     public void turnRoverInNorthToRight() {
-        State.NORTH.turnRight(rover);
-        verify(rover).setState(EAST);
+        State.N.turnRight(rover);
+        verify(rover).setState(E);
     }
 
     @Test
     public void movesRoverToSouth() throws OutOfAreaException {
-        State.SOUTH.move(rover);
+        State.S.move(rover);
         verify(rover).movesToSouth();
     }
 
     @Test
     public void turnRoverInSouthToLeft() {
-        State.SOUTH.turnLeft(rover);
-        verify(rover).setState(EAST);
+        State.S.turnLeft(rover);
+        verify(rover).setState(E);
     }
 
     @Test
     public void turnRoverInSouthToRight() {
-        State.SOUTH.turnRight(rover);
-        verify(rover).setState(WEST);
+        State.S.turnRight(rover);
+        verify(rover).setState(W);
     }
 
     @Test
     public void movesRoverToEast() throws OutOfAreaException {
-        State.EAST.move(rover);
+        State.E.move(rover);
         verify(rover).movesToEast();
     }
 
     @Test
     public void turnRoverInEastToLeft() {
-        State.EAST.turnLeft(rover);
-        verify(rover).setState(NORTH);
+        State.E.turnLeft(rover);
+        verify(rover).setState(N);
     }
 
     @Test
     public void turnRoverInEastToRight() {
-        State.EAST.turnRight(rover);
-        verify(rover).setState(SOUTH);
+        State.E.turnRight(rover);
+        verify(rover).setState(S);
     }
 
     @Test
     public void movesRoverToWest() throws OutOfAreaException {
-        State.WEST.move(rover);
+        State.W.move(rover);
         verify(rover).movesToWest();
     }
 
     @Test
     public void turnRoverInWestToLeft() {
-        State.WEST.turnLeft(rover);
-        verify(rover).setState(SOUTH);
+        State.W.turnLeft(rover);
+        verify(rover).setState(S);
     }
 
     @Test
     public void turnRoverInWestToRight() {
-        State.WEST.turnRight(rover);
-        verify(rover).setState(NORTH);
+        State.W.turnRight(rover);
+        verify(rover).setState(N);
     }
 }

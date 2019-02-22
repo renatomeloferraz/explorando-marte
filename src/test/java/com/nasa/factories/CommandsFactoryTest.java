@@ -1,6 +1,7 @@
 package com.nasa.factories;
 
 import com.nasa.domain.Command;
+import com.nasa.domain.State;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +25,7 @@ public class CommandsFactoryTest {
         Command command = commands.get(0);
         assertEquals(1, command.getX());
         assertEquals(2, command.getY());
-        assertEquals("N", command.getDirection());
+        assertEquals(State.N, command.getState());
         assertEquals(9, command.getMovements().length);
     }
 

@@ -1,6 +1,7 @@
 package com.nasa.factories;
 
 import com.nasa.domain.Command;
+import com.nasa.domain.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,26 @@ public class CommandsFactory {
             commands.add(new Command(
                     Integer.parseInt(matcher.group("x")),
                     Integer.parseInt(matcher.group("y")),
-                    matcher.group("direction" ),
+                    getState(matcher.group("direction" )),
                     matcher.group("movements" ).split("")
             ));
         }
 
         return commands;
+    }
+
+    private State getState(String direction) {
+        switch (direction) {
+            case "N":
+                return State.N;
+            case "S":
+                return State.S;
+            case "E":
+                return State.E;
+            case "W":
+                return State.W;
+            default:
+                return State.N;
+        }
     }
 }

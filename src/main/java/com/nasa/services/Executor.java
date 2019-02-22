@@ -6,11 +6,8 @@ import com.nasa.domain.Rover;
 import com.nasa.domain.StateEventListener;
 import com.nasa.exception.OutOfAreaException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Executor implements StateEventListener {
-    List<Rover> run(Area area, Command command) throws OutOfAreaException {
+    Rover run(Area area, Command command) throws OutOfAreaException {
         Rover rover = command.getRover(area);
 
         for(String movement : command.getMovements()) {
@@ -27,7 +24,7 @@ public class Executor implements StateEventListener {
             }
         }
 
-        return new ArrayList<>();
+        return rover;
     }
 
     public void move(Rover rover) throws OutOfAreaException {

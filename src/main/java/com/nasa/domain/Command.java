@@ -3,13 +3,13 @@ package com.nasa.domain;
 public class Command {
     private final int x;
     private final int y;
-    private final String direction;
+    private final State state;
     private final String[] movements;
 
-    public Command(int x, int y, String direction, String[] movements) {
+    public Command(int x, int y, State state, String[] movements) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.state = state;
         this.movements = movements;
     }
 
@@ -21,8 +21,8 @@ public class Command {
         return y;
     }
 
-    public String getDirection() {
-        return direction;
+    public State getState() {
+        return state;
     }
 
     public String[] getMovements() {
@@ -30,6 +30,6 @@ public class Command {
     }
 
     public Rover getRover(Area area) {
-        return new Rover(area, x, y);
+        return new Rover(area, x, y, state);
     }
 }
