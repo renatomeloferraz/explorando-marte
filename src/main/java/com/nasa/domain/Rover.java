@@ -1,36 +1,62 @@
 package com.nasa.domain;
 
+import com.nasa.exception.OutOfAreaException;
+
 public class Rover {
-    private int x = 0;
-    private int y = 0;
+
+    private final Area area;
+
+    private int x;
+    private int y;
     private State state = State.NORTH;
 
-    public Rover(int x, int y) {
+    Rover(Area area, int x, int y) {
+        this.area = area;
         this.x = x;
         this.y = y;
+    }
+
+    int getX() {
+        return x;
+    }
+
+    int getY() {
+        return y;
     }
 
     public State getState() {
         return state;
     }
 
-    public void setState(State state) {
+    void setState(State state) {
         this.state = state;
     }
 
-    public void moveToNorth() {
-
+    void movesToNorth() throws OutOfAreaException {
+        this.y++;
+        if (y >= area.getTop()) {
+            throw new OutOfAreaException();
+        }
     }
 
-    public void moveToSouth() {
-
+    void movesToSouth() throws OutOfAreaException {
+        this.y--;
+        if (y <= area.getBottom()) {
+            throw new OutOfAreaException();
+        }
     }
 
-    public void moveToEast() {
-
+    void movesToEast() throws OutOfAreaException {
+        this.x++;
+        if (x >= area.getRight()) {
+            throw new OutOfAreaException();
+        }
     }
 
-    public void moveToWest() {
-
+    void movesToWest() throws OutOfAreaException {
+        this.x--;
+        if (x <= area.getLeft()) {
+            throw new OutOfAreaException();
+        }
     }
 }

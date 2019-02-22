@@ -1,5 +1,6 @@
 package com.nasa.domain;
 
+import com.nasa.exception.OutOfAreaException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,9 +16,9 @@ public class StateTest {
     Rover rover;
 
     @Test
-    public void movesRoverToNorth() {
+    public void movesRoverToNorth() throws OutOfAreaException {
         State.NORTH.move(rover);
-        verify(rover).moveToNorth();
+        verify(rover).movesToNorth();
     }
 
     @Test
@@ -33,9 +34,9 @@ public class StateTest {
     }
 
     @Test
-    public void movesRoverToSouth() {
+    public void movesRoverToSouth() throws OutOfAreaException {
         State.SOUTH.move(rover);
-        verify(rover).moveToSouth();
+        verify(rover).movesToSouth();
     }
 
     @Test
@@ -51,9 +52,9 @@ public class StateTest {
     }
 
     @Test
-    public void movesRoverToEast() {
+    public void movesRoverToEast() throws OutOfAreaException {
         State.EAST.move(rover);
-        verify(rover).moveToEast();
+        verify(rover).movesToEast();
     }
 
     @Test
@@ -69,9 +70,9 @@ public class StateTest {
     }
 
     @Test
-    public void movesRoverToWest() {
+    public void movesRoverToWest() throws OutOfAreaException {
         State.WEST.move(rover);
-        verify(rover).moveToWest();
+        verify(rover).movesToWest();
     }
 
     @Test

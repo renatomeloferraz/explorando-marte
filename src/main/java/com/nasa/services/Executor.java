@@ -1,12 +1,17 @@
 package com.nasa.services;
 
+import com.nasa.domain.Area;
 import com.nasa.domain.Command;
 import com.nasa.domain.Rover;
 import com.nasa.domain.StateEventListener;
+import com.nasa.exception.OutOfAreaException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Executor implements StateEventListener {
-    void run(Command command) {
-        Rover rover = command.getRover();
+    List<Rover> run(Area area, Command command) throws OutOfAreaException {
+        Rover rover = command.getRover(area);
 
         for(String movement : command.getMovements()) {
             switch (movement) {
@@ -21,9 +26,11 @@ public class Executor implements StateEventListener {
                     break;
             }
         }
+
+        return new ArrayList<>();
     }
 
-    public void move(Rover rover) {
+    public void move(Rover rover) throws OutOfAreaException {
         rover.getState().move(rover);
     }
 

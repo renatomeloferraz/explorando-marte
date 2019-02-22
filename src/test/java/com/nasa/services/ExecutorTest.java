@@ -1,8 +1,10 @@
 package com.nasa.services;
 
+import com.nasa.domain.Area;
 import com.nasa.domain.Command;
 import com.nasa.domain.Rover;
 import com.nasa.domain.State;
+import com.nasa.exception.OutOfAreaException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,26 +28,29 @@ public class ExecutorTest {
     @Mock
     private State state;
 
+    @Mock
+    private Area area;
+
     private Executor executor;
 
     @Before
     public void setUp() {
         when(rover.getState()).thenReturn(state);
-        when(command.getRover()).thenReturn(rover);
+        when(command.getRover(area)).thenReturn(rover);
         executor = new Executor();
     }
 
     @Test
-    public void movesRover() {
+    public void movesRover() throws OutOfAreaException {
         when(command.getMovements()).thenReturn(new String[] { "M" });
-        executor.run(command);
+        executor.run(area, command);
         verify(state).move(rover);
     }
 
     @Test
-    public void turnRover() {
+    public void turnRover() throws OutOfAreaException {
         when(command.getMovements()).thenReturn(new String[] { "L", "R" });
-        executor.run(command);
+        executor.run(area, command);
 
         InOrder orderVerifier = Mockito.inOrder(state);
 

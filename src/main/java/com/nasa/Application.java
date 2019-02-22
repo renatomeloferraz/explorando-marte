@@ -1,6 +1,7 @@
 package com.nasa;
 
 import com.nasa.exception.InvalidSequenceException;
+import com.nasa.exception.OutOfAreaException;
 import com.nasa.factories.AreaFactory;
 import com.nasa.factories.CommandsFactory;
 import com.nasa.services.CommandCenter;
@@ -18,7 +19,7 @@ public class Application {
 
         try {
             commandCenter.execute(Arrays.toString(sequence));
-        } catch (InvalidSequenceException e) {
+        } catch (InvalidSequenceException | OutOfAreaException e) {
             System.out.println(e.getMessage());
         }
     }

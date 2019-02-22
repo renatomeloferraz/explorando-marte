@@ -29,7 +29,7 @@ public class Command {
         return movements;
     }
 
-    public Rover getRover() {
-        return new Rover(x, y);
+    public Rover getRover(Area area) {
+        return new Rover(area, x, y);
     }
 }

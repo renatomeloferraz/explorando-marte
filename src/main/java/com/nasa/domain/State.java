@@ -1,10 +1,12 @@
 package com.nasa.domain;
 
+import com.nasa.exception.OutOfAreaException;
+
 public enum State implements StateEventListener {
 
     NORTH {
-        public void move(Rover rover) {
-            rover.moveToNorth();
+        public void move(Rover rover) throws OutOfAreaException {
+            rover.movesToNorth();
         }
 
         public void turnLeft(Rover rover) {
@@ -16,8 +18,8 @@ public enum State implements StateEventListener {
         }
     },
     SOUTH {
-        public void move(Rover rover) {
-            rover.moveToSouth();
+        public void move(Rover rover) throws OutOfAreaException {
+            rover.movesToSouth();
         }
 
         public void turnLeft(Rover rover) {
@@ -29,8 +31,8 @@ public enum State implements StateEventListener {
         }
     },
     EAST {
-        public void move(Rover rover) {
-            rover.moveToEast();
+        public void move(Rover rover) throws OutOfAreaException {
+            rover.movesToEast();
         }
 
         public void turnLeft(Rover rover) {
@@ -42,8 +44,8 @@ public enum State implements StateEventListener {
         }
     },
     WEST {
-        public void move(Rover rover) {
-            rover.moveToWest();
+        public void move(Rover rover) throws OutOfAreaException {
+            rover.movesToWest();
         }
 
         public void turnLeft(Rover robot) {

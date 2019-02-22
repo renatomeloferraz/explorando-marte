@@ -1,7 +1,9 @@
 package com.nasa.services;
 
+import com.nasa.domain.Area;
 import com.nasa.domain.Command;
 import com.nasa.exception.InvalidSequenceException;
+import com.nasa.exception.OutOfAreaException;
 import com.nasa.factories.AreaFactory;
 import com.nasa.factories.CommandsFactory;
 
@@ -21,13 +23,13 @@ public class CommandCenter {
         this.executor = executor;
     }
 
-    public void execute(String sequence) throws InvalidSequenceException {
+    public void execute(String sequence) throws InvalidSequenceException, OutOfAreaException {
         if(isValid(sequence)) {
-            areaFactory.create(sequence);
+            Area area = areaFactory.create(sequence);
             List<Command> commands = commandsFactory.create(sequence);
 
             for(Command command : commands) {
-                executor.run(command);
+                executor.run(area, command);
             }
         }
     }
