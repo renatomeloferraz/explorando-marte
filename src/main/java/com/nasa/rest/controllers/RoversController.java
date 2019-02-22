@@ -15,4 +15,9 @@ public class RoversController {
     public Rover create(@RequestBody Rover request) {
         return builder.create(request);
     }
+
+    @GetMapping("/rovers/{id}")
+    public Rover find(@PathVariable("id") String id) {
+        return builder.find(id);
+    }
 }

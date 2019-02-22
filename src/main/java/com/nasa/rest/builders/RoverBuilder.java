@@ -19,4 +19,8 @@ public class RoverBuilder {
     public Map<String, Rover> getRovers() {
         return rovers;
     }
+
+    public Rover find(String id) {
+        return rovers.get(id);
+    }
 }

@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "e309b43c-11f9-43d3-83fd-dafd0a5ef4f1",
+		"name": "Explorando Marte",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE ROVER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b50af9c-2a48-448c-a79b-f45596acb5bb",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"area\": { \n\t\t\"top\": 5,\n\t\t\"right\": 5\n\t},\n\t\"x\": 1,\n\t\"y\": 2,\n\t\"direction\": \"N\" \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/rovers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rovers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ROVER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/rovers/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rovers",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

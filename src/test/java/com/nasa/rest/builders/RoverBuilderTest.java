@@ -40,4 +40,11 @@ public class RoverBuilderTest {
 
         assertEquals(2, builder.getRovers().size());
     }
+
+    @Test
+    public void findRoverCreated() {
+        when(rover.getId()).thenReturn("1");
+        builder.create(rover);
+        assertEquals(rover, builder.find("1" ));
+    }
 }

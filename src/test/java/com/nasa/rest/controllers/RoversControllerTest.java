@@ -23,8 +23,14 @@ public class RoversControllerTest {
     private RoversController controller;
 
     @Test
-    public void callsRoverBuilderToCreateRover() {
+    public void callsCreateRover() {
         controller.create(request);
         verify(builder).create(request);
+    }
+
+    @Test
+    public void callsFindRover() {
+        controller.find("1");
+        verify(builder).find("1");
     }
 }
