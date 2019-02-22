@@ -25,7 +25,7 @@ public class CommandsFactoryTest {
         assertEquals(1, command.getX());
         assertEquals(2, command.getY());
         assertEquals("N", command.getDirection());
-        assertEquals("LMLMLMLMM", command.getMovements());
+        assertEquals(9, command.getMovements().length);
     }
 
     @Test
