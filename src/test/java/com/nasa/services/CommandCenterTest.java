@@ -51,16 +51,16 @@ public class CommandCenterTest {
     @Test
     public void callsExecutorAccordingNumberCommands() throws Exception {
         String sequence = "5 5 1 2 N LMLMLMLMM 3 3 E MMRMMRMRRM";
-        when(commandsFactory.create(sequence)).thenReturn(Arrays.asList(mock(Command.class), mock(Command.class)));
+        when(commandsFactory.create(area, sequence)).thenReturn(Arrays.asList(mock(Command.class), mock(Command.class)));
         control.execute(sequence);
-        verify(executor, times(2)).run(eq(area), any(Command.class));
+        verify(executor, times(2)).run(any(Command.class));
     }
 
     @Test
     public void callsCommandsFactoryIfSequenceIsValid() throws Exception {
         String Sequence = "5 5 1 2 N LMLMLMLMM";
         control.execute(Sequence);
-        verify(commandsFactory).create(Sequence);
+        verify(commandsFactory).create(area, Sequence);
     }
 
     @Test(expected = InvalidSequenceException.class)
@@ -83,8 +83,8 @@ public class CommandCenterTest {
     @Test(expected = OutOfAreaException.class)
     public void throwsExceptionAreaFactorythrowException2() throws Exception {
         String sequence = "5 5 1 2 N LMLMLMLMM";
-        when(commandsFactory.create(sequence)).thenReturn(Arrays.asList(mock(Command.class), mock(Command.class)));
-        when(executor.run(eq(area), any(Command.class))).thenThrow(OutOfAreaException.class);
+        when(commandsFactory.create(area, sequence)).thenReturn(Arrays.asList(mock(Command.class), mock(Command.class)));
+        when(executor.run(any(Command.class))).thenThrow(OutOfAreaException.class);
         control.execute(sequence);
     }
 }

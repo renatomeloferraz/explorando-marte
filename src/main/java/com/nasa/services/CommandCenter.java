@@ -25,16 +25,15 @@ public class CommandCenter {
         this.executor = executor;
     }
 
-    public ArrayList<Rover> execute(String sequence) throws InvalidSequenceException, OutOfAreaException {
+    public List<Rover> execute(String sequence) throws InvalidSequenceException, OutOfAreaException {
         ArrayList<Rover> rovers = new ArrayList<>();
 
         if(isValid(sequence)) {
             Area area = areaFactory.create(sequence);
-            List<Command> commands = commandsFactory.create(sequence);
-
+            List<Command> commands = commandsFactory.create(area, sequence);
 
             for(Command command : commands) {
-                Rover rover = executor.run(area, command);
+                Rover rover = executor.run(command);
                 rovers.add(rover);
             }
         }
@@ -42,7 +41,7 @@ public class CommandCenter {
         return rovers;
     }
 
-    private boolean isValid(String sequence) throws InvalidSequenceException {
+    private Boolean isValid(String sequence) throws InvalidSequenceException {
         Pattern pattern = Pattern.compile(AreaFactory.AREA_REGEX + "\\s" + CommandsFactory.COMMAND_REGEX);
         Matcher matcher = pattern.matcher(sequence);
 

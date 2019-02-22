@@ -1,14 +1,14 @@
 package com.nasa.services;
 
-import com.nasa.domain.Area;
 import com.nasa.domain.Command;
 import com.nasa.domain.Rover;
 import com.nasa.domain.StateEventListener;
+import com.nasa.exception.InvalidSequenceException;
 import com.nasa.exception.OutOfAreaException;
 
 public class Executor implements StateEventListener {
-    Rover run(Area area, Command command) throws OutOfAreaException {
-        Rover rover = command.getRover(area);
+    Rover run(Command command) throws OutOfAreaException, InvalidSequenceException {
+        Rover rover = command.getRover();
 
         for(String movement : command.getMovements()) {
             switch (movement) {
@@ -21,6 +21,8 @@ public class Executor implements StateEventListener {
                 case "L":
                     turnLeft(rover);
                     break;
+                default:
+                    throw new InvalidSequenceException();
             }
         }
 

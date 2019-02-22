@@ -8,10 +8,19 @@ import com.nasa.factories.CommandsFactory;
 import com.nasa.services.CommandCenter;
 import com.nasa.services.Executor;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
+
 
 public class Application {
+
+    private static Logger logger;
+
+    static {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s %n");
+        logger = Logger.getLogger(Application.class.getName());
+    }
 
     public static void main(String[] sequence) {
         CommandCenter commandCenter = new CommandCenter(
@@ -20,17 +29,18 @@ public class Application {
                 new Executor());
 
         try {
-            ArrayList<Rover> rovers = commandCenter.execute(parserSequence(sequence));
+            List<Rover> rovers = commandCenter.execute(parserSequence(sequence));
             print(rovers);
 
         } catch (InvalidSequenceException | OutOfAreaException e) {
-            System.out.println(e.getMessage());
+            logger.warning(e.getMessage());
         }
     }
 
-    private static void print(ArrayList<Rover> rovers) {
+    private static void print(List<Rover> rovers) {
         for(Rover rover : rovers) {
-            System.out.println(rover.toString());
+            String result = rover.toString();
+            logger.info(result);
         }
     }
 

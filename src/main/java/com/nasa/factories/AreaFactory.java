@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AreaFactory {
-    public static String AREA_REGEX = "^(?<top>\\d)\\s(?<right>\\d)";
+    public static final String AREA_REGEX = "^(?<top>\\d)\\s(?<right>\\d)";
 
     public Area create(String sequence) throws InvalidSequenceException {
         Pattern pattern = Pattern.compile(AREA_REGEX);

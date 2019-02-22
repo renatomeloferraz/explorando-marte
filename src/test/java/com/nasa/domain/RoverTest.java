@@ -66,4 +66,10 @@ public class RoverTest {
         Rover rover = new Rover(area, 0, 0, State.S);
         rover.movesToWest();
     }
+
+    @Test
+    public void informToString() {
+        Rover rover = new Rover(area, 3, 0, State.S);
+        assertEquals("3 0 S", rover.toString());
+    }
 }

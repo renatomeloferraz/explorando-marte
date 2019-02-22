@@ -1,10 +1,9 @@
 package com.nasa.services;
 
-import com.nasa.domain.Area;
 import com.nasa.domain.Command;
 import com.nasa.domain.Rover;
 import com.nasa.domain.State;
-import com.nasa.exception.OutOfAreaException;
+import com.nasa.exception.InvalidSequenceException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,33 +27,36 @@ public class ExecutorTest {
     @Mock
     private State state;
 
-    @Mock
-    private Area area;
-
     private Executor executor;
 
     @Before
     public void setUp() {
         when(rover.getState()).thenReturn(state);
-        when(command.getRover(area)).thenReturn(rover);
+        when(command.getRover()).thenReturn(rover);
         executor = new Executor();
     }
 
     @Test
-    public void movesRover() throws OutOfAreaException {
+    public void movesRover() throws Exception {
         when(command.getMovements()).thenReturn(new String[] { "M" });
-        executor.run(area, command);
+        executor.run(command);
         verify(state).move(rover);
     }
 
     @Test
-    public void turnRover() throws OutOfAreaException {
+    public void turnRover() throws Exception {
         when(command.getMovements()).thenReturn(new String[] { "L", "R" });
-        executor.run(area, command);
+        executor.run(command);
 
         InOrder orderVerifier = Mockito.inOrder(state);
 
         orderVerifier.verify(state).turnLeft(rover);
         orderVerifier.verify(state).turnRight(rover);
+    }
+
+    @Test(expected = InvalidSequenceException.class)
+    public void throwsInvalidSequenceExceptionIfMovementIsInvalid() throws Exception {
+        when(command.getMovements()).thenReturn(new String[] { "X" });
+        executor.run(command);
     }
 }

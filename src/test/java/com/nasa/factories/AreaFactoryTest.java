@@ -9,11 +9,12 @@ import static org.junit.Assert.assertEquals;
 
 public class AreaFactoryTest {
 
+    private AreaFactory factory;
     private Area area;
 
     @Before
     public void setUp() throws InvalidSequenceException {
-        AreaFactory factory = new AreaFactory();
+        factory = new AreaFactory();
         area = factory.create("5 5 1 2 N LMLMLMLMM");
     }
 
@@ -35,5 +36,10 @@ public class AreaFactoryTest {
     @Test
     public void informsLeft() {
         assertEquals(0, area.getLeft());
+    }
+
+    @Test(expected = InvalidSequenceException.class)
+    public void throwsInvalidSequenceExceptionIfIsInvalid() throws Exception {
+        area = factory.create("A A");
     }
 }
